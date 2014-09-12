@@ -4,7 +4,7 @@
 /* Default settings; can be overrided by command line. */
 
 static Bool topbar = True;                  /* -b  option; if False, dmenu appears at bottom */
-static const char *font = NULL;             /* -fn option; default X11 font or font set      */
+static const char *font = "unifont-12";             /* -fn option; default X11 font or font set      */
 static const char *prompt = NULL;           /* -p  option; prompt to the elft of input field */
 static const char *normbgcolor = "#111111"; /* -nb option; normal background                 */
 static const char *normfgcolor = "#bbbbbb"; /* -nf option; normal foreground                 */
