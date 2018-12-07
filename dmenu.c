@@ -500,6 +500,12 @@ insert:
 
 draw:
 	drawmenu();
+
+	if (unique && matches && !matches->right) {
+		puts(matches->text);
+		cleanup();
+		exit(0);
+	}
 }
 
 static void
@@ -788,6 +794,8 @@ setup(void)
 	xim = XOpenIM(dpy, NULL, NULL, NULL);
 	xic = XCreateIC(xim, XNInputStyle, XIMPreeditNothing | XIMStatusNothing,
 	                XNClientWindow, win, XNFocusWindow, win, NULL);
+	if (!xic)
+		die("can't open x input method");
 
 	XMapRaised(dpy, win);
 	XSetInputFocus(dpy, win, RevertToParent, CurrentTime);
@@ -825,6 +833,8 @@ main(int argc, char *argv[])
 			exit(0);
 		} else if (!strcmp(argv[i], "-b")) /* appears at the bottom of the screen */
 			topbar = 0;
+		else if (!strcmp(argv[i], "-u")) /* immediately use a unique match */
+			unique = 1;
 		else if (!strcmp(argv[i], "-f"))   /* grabs keyboard before reading stdin */
 			fast = 1;
 		else if (!strcmp(argv[i], "-i")) { /* case-insensitive item matching */
